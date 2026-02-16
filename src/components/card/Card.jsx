@@ -8,9 +8,9 @@
  * @returns
  */
 
-
-import Button from "./Button";
-import Input from "./Input";
+import React from "react";
+import Button from "../button/Button";
+import Input from "../input/Input";
 import "./Card.css";
 
 export default function Card() {

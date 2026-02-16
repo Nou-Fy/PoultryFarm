@@ -11,7 +11,7 @@ import React, { useState } from "react";
 export default function Button({
   label,
   clickedLabel,
-  type = "button", // important
+  type = "button",
   onClick,
 }) {
   const [isClicked, setIsClicked] = useState(false);

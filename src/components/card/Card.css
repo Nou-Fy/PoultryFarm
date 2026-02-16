@@ -1,0 +1,19 @@
+.card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  border: "1px solid #ccc";
+  background-color: "#fff";
+  border: solid 1px #ff0000;
+  width: 20%;
+  height: 250px;
+  gap: 16px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
