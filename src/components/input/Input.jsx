@@ -10,6 +10,8 @@
 
 export default function Input({ label, type, placeholder, value, onChange }) {
 
+  
+
 
   return (
     <div className="input-group">

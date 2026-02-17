@@ -4,8 +4,7 @@
  * Ce composant représente la page de tableau de bord de la ferme. Il affiche un message de bienvenue et inclut une carte pour visualiser les données de la ferme.
  */
 
-import React from "react";
-import Card from "../components/card/Card";
+import { CardShow } from "../components/CardShow/CardShow";
 
 export default function Dashboard() {
   return (
@@ -15,17 +14,7 @@ export default function Dashboard() {
         <p>Bienvenue dans le Dashboard de la ferme</p>
       </div>
       <div className="card-container">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <CardShow />
       </div>
     </>
   );

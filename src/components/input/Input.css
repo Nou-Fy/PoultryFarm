@@ -1,21 +1,16 @@
 input {
-  width: 100%;                /* prend toute la largeur du parent */
-  padding: 10px 12px;         /* espace intérieur confortable */
+  width: 100%;                
   font-size: 16px;
-  border: 1px solid #eaff00;  /* bordure personnalisée */
-  border-radius: 4px;         /* coins arrondis */
-  box-sizing: border-box;     /* inclut padding dans la largeur */
-  outline: none;              /* retire le contour par défaut au focus */
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #6f7061;  
+  border-radius: 4px;         
 }
 
-/* Effet au focus pour meilleure UX */
 input:focus {
   border-color: #c0ff00;
-  box-shadow: 0 0 5px rgba(224, 255, 0, 0.5);
+  box-shadow: 0 0 5px rgba(30, 30, 30, 0.5);
 }
 
-/* Optionnel : spacing entre plusieurs inputs */
-.card input + input {
+/* .card input + input {
   margin-top: 12px;
-}
+} */
