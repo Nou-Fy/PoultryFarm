@@ -11,12 +11,12 @@ import React from "react";
 import Button from "../button/Button";
 import "./Card.css";
 
-export default function Card() {
+export default function Card({data}) {
 
-  
   return (
     <div className="card" style={{}}>
-      <h2>Un élément</h2>
+      <h2>{data?.name}</h2>
+      <p>{data?.email}</p>
 
      <div className="card-buttons">
        <Button className="card-button"
