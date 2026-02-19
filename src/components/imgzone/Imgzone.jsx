@@ -1,3 +1,10 @@
+/**
+ * 
+ * @param {string} src
+ * @param {string} alt 
+ * @returns 
+ */
+
 
 export  function Imgzone({src, alt}) {
   return (

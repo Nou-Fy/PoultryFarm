@@ -8,7 +8,7 @@
  */
 import React, { useState } from "react";
 
-export default function Button({
+export default function ButtonPush({
   label,
   clickedLabel,
   type = "button",

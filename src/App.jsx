@@ -1,13 +1,9 @@
-import './App.css'
-import Dashboard from './pages/Dashbord'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Dashboard from './pages/Dashbord';
 
-function App() {
-
+export default function App() {
   return (
-    <>
     <Dashboard />
-    </>
-  )
+  );
 }
-
-export default App
