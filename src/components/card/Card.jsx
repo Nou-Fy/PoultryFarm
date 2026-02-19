@@ -13,27 +13,13 @@ import "./Card.css";
 import ButtonPush from "../button/ButtonPush";
 import { Imgzone } from "../imgzone/Imgzone";
 
-export default async function Card() {
-  const [done, setDone] = React.useState(false);
+export default function Card() {
 
-  const posts = await fetchFromJsonPlaceholder("/posts");
-  console.log(posts);
-
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const todos = await fetchFromJsonPlaceholder("/todos?_limit=10");
-        setTodos(todos);
-      } catch (err) {
-        // gérer l'erreur (afficher message, etc.)
-      }
-    }
-    loadData();
-  }, []);
-
+  
   return (
     <div className="card" style={{}}>
-      <h2>Un élément</h2>
+      <h2>{data?.name}</h2>
+      <p>{data?.email}</p>
 
       <div>
         <Imgzone src={done} alt="Banniere_1" />
