@@ -1,32 +1,17 @@
-
 /**
- * @param {string} label
- * @param {string} clickedLabel
  * @param {string} type
  * @param {(e: React.MouseEvent<HTMLButtonElement>) => void} onClick
  * @returns
  */
-import React, { useState } from "react";
 
 export default function ButtonPush({
-  label,
-  clickedLabel,
-  type = "button",
+  type = "button" | "submit" | "reset",
+  label = "Valiny",
   onClick,
 }) {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = (e) => {
-    setIsClicked(true);
-
-    if (onClick) {
-      onClick(e);
-    }
-  };
-
   return (
-    <button type={type} onClick={handleClick}>
-      {isClicked && clickedLabel ? clickedLabel : label}
-    </button>
+    <div>
+      <button type={type} onClick={onClick}>{label}</button>
+    </div>
   );
 }

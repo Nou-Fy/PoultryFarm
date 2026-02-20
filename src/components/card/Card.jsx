@@ -13,25 +13,22 @@ import "./Card.css";
 import ButtonPush from "../button/ButtonPush";
 import { Imgzone } from "../imgzone/Imgzone";
 
-export default function Card() {
-
-  
+export default function Card({ data }) {
   return (
-    <div className="card" style={{}}>
-      <h2>{data?.name}</h2>
-      <p>{data?.email}</p>
+    <div className="card">
+      <h2>{data.name}</h2>
+      <p>{data.email}</p>
 
-      <div>
-        <Imgzone src={done} alt="Banniere_1" />
+      <div className="cards_photos">
+        <Imgzone
+          src={"src/assets/Banniere_1.jpg"}
+          alt="Banniere_1"
+        />
       </div>
 
       <div className="card-buttons">
-        <Button
-          className="card-button"
-          type="reset"
-          label="Annuler"
-          clickedLabel="Annulé"
-        />
+          <ButtonPush type="button" />
+        
         <ButtonPush
           className="card-button"
           type="submit"

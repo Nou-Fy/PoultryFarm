@@ -1,81 +1,65 @@
-/**
- * Dashboard.jsx
- *
- * Ce composant représente la page de tableau de bord de la ferme. Il affiche un message de bienvenue et inclut une carte pour visualiser les données de la ferme.
- */
-
-import { Example as Modal } from "../components/UI/Modal";
 import Button from "../components/button/ButtonPush";
 import Card from "../components/card/Card";
 import Input from "../components/input/Input";
+import ModalCard from "../components/UI/Modal";
 import { useState } from "react";
-import { createCard } from "../utilss";
 
 export default function Dashboard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const [textInput, setTextInput] = useState("");
   const [result, setResult] = useState("");
-
   const [cards, setCards] = useState({
-  "users": [
-    {
-      "id": 1,
-      "name": "Alice Martin",
-      "email": "alice@example.com",
-      "role": "Admin",
-      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice"
-    },
-    {
-      "id": 2,
-      "name": "Thomas Bernard",
-      "email": "thomas@example.com",
-      "role": "User",
-      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Thomas"
-    },
-    {
-      "id": 3,
-      "name": "Léa Petit",
-      "email": "lea@example.com",
-      "role": "Editor",
-      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Lea"
-    }
-  ],
-  "status": "success",
-  "count": 3
-})
+    users: [
+      { id: 1, name: "Alice Martin", email: "alice@example.com" },
+      { id: 2, name: "Thomas Bernard", email: "thomas@example.com" },
+    ],
+    currentName: "", // On stocke le nom ici plutôt que de casser la structure
+  });
 
+  // Gestion du changement dans l'input
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setTextInput(value);
+    setCards((prev) => ({
+      ...prev,
+      currentName: value,
+    }));
+  };
 
   const handleClick = () => {
     setResult(textInput);
     setTextInput("");
-    createCard(textInput);
+    // handlechange() a été supprimé d'ici car il n'y a pas d'événement 'e'
+    console.log("Nom validé :", textInput);
   };
-
-
 
   return (
     <>
       <div className="dashboard">
-        <div className="card-container_Modal_Top">
-          <Modal />
-        </div>
+
         <div>
-          <Input value={textInput} onChange={setTextInput} />
-          <Button onClick={handleClick} label="Description" />
-          <p>{result}</p>
+          {/* Le bouton qui déclenche l'ouverture */}
+          <button onClick={openModal}>Afficher les détails d'Alice</button>
+
+          {/* On appelle le composant en lui passant l'état et la fonction de fermeture */}
+          <ModalCard show={isModalOpen} onHide={closeModal} />
         </div>
 
-        <h1>Dashboard</h1>
-        <p>Bienvenue dans le Dashboard de la ferme</p>
-<<<<<<< HEAD
-
-        <Card />
-=======
+        <div>
+          <Input value={textInput} label="Andrana" onChange={handleInputChange} />
+          <Button onClick={handleClick} type="submit" label="Description" />
+          <p>Résultat : {result}</p>
+        </div>
       </div>
+
       <div className="card-container">
-        {cards?.users?.map((card)=> (
-          <CardShow key={card.id} data={card} />
+        {cards.users.map((user) => (
+          <Card key={user.id} data={user} />
         ))}
->>>>>>> 86324e78787ca4e87a59c847b1df587f0c58e4e7
       </div>
     </>
   );

@@ -1,0 +1,6 @@
+
+.card-img {
+  flex: 1; /* L'image prend tout l'espace disponible */
+  width: 100%; /* Important pour garder la largeur */
+  object-fit: cover;
+}

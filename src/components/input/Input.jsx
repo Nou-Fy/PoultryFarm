@@ -1,25 +1,21 @@
 /**
- * 
  * @param {string} label 
  * @param {string} type 
  * @param {string} placeholder 
  * @param {string} value 
- * @param {(s: string) => void} onChange  * 
- * @returns 
+ * @param {function} onChange 
  */
 
-export default function Input({ label, type, placeholder, value, onChange }) {
-
-  
-
-
+export default function Input({ label, type, placeholder, value, onChange }) { 
   return (
     <div className="input-group">
-      <label htmlFor={label}>{label}</label>
-      <input type={type} 
-      placeholder={placeholder} 
-      value={value} 
-      onChange={(e) => onChange(e.target.value)} />
+      <label>{label}</label>
+      <input 
+        type={type}
+        placeholder={placeholder} 
+        value={value} 
+        onChange={onChange} // C'est cette ligne qui manquait !
+      />
     </div>
   )
 }

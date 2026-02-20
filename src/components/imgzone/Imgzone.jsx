@@ -8,7 +8,7 @@
 
 export  function Imgzone({src, alt}) {
   return (
-    <div className="imgzone">
+    <div className="card-img">
         <img src={src} alt={alt} />   
     </div>
   );
