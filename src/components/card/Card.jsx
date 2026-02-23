@@ -8,32 +8,33 @@
  */
 
 import React from "react";
-import Button from "../button/ButtonPush";
 import "./Card.css";
 import ButtonPush from "../button/ButtonPush";
-import { Imgzone } from "../imgzone/Imgzone";
 
 export default function Card({ data }) {
   return (
     <div className="card">
-      <h2>{data.name}</h2>
-      <p>{data.email}</p>
-
-      <div className="cards_photos">
-        <Imgzone
-          src={"src/assets/Banniere_1.jpg"}
-          alt="Banniere_1"
-        />
+      <img src={data.avatar} alt={data.nom} className="cards_photos" />
+      <div>
+        <h2>{data.nom}</h2>
+        <p>{data.race}</p>
+        <p>{data.ageMois} mois</p>
+        <p>{data.poids} kg</p>
+        <p>{data.notes}</p>
       </div>
-
       <div className="card-buttons">
-          <ButtonPush type="button" />
-        
         <ButtonPush
           className="card-button"
-          type="submit"
-          label="Envoyer"
-          clickedLabel="Merci !"
+          type="button"
+          label="Modifier"
+          clickedLabel="Modifier !"
+        />
+
+        <ButtonPush
+          className="card-button"
+          type="reset"
+          label="Annuler"
+          clickedLabel="Reset !"
         />
       </div>
     </div>

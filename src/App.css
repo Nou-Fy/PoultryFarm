@@ -1,6 +1,21 @@
+/* On force le conteneur principal à prendre toute la largeur */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
 #root {
+  width: 100%; /* Force la largeur à 100% du body */
+  max-width: 100vw; /* Empêche le débordement horizontal */
+  margin: 0 auto;
   padding: 2rem;
+  box-sizing: border-box; /* Très important pour que le padding ne dépasse pas */
   text-align: center;
+  
+  /* Si tu veux que le contenu soit aussi étalé verticalement */
+  min-height: 100vh;
 }
 
 .logo {

@@ -6,7 +6,7 @@
 
 export default function ButtonPush({
   type = "button" | "submit" | "reset",
-  label = "Valiny",
+  label ,
   onClick,
 }) {
   return (

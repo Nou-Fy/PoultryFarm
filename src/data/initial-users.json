@@ -1,0 +1,41 @@
+{
+  "poules": [
+    {
+      "id": 1,
+      "nom": "Blanchette",
+      "race": "Sussex",
+      "ageMois": 18,
+      "ponteParSemaine": 5,
+      "couleurOeuf": "beige",
+      "sante": "bonne",
+      "dateArrivee": "2025-01-15",
+      "notes": "Très bonne pondeuse, un peu curieuse",
+      "avatar": "https://i.pravatar.cc/150?img=68"
+    },
+    {
+      "id": 2,
+      "nom": "Noirette",
+      "race": "Noire de Houdan",
+      "ageMois": 14,
+      "ponteParSemaine": 4,
+      "couleurOeuf": "blanc",
+      "sante": "bonne",
+      "dateArrivee": "2025-03-20",
+      "notes": "Timide, aime se cacher",
+      "avatar": "https://i.pravatar.cc/150?img=45"
+    },
+    {
+      "id": 3,
+      "nom": "Rousse",
+      "race": "Rousse New Hampshire",
+      "ageMois": 10,
+      "ponteParSemaine": 6,
+      "couleurOeuf": "brun clair",
+      "sante": "excellente",
+      "dateArrivee": "2025-08-10",
+      "notes": "La plus active du groupe",
+      "avatar": "https://i.pravatar.cc/150?img=32"
+    }
+  ],
+  "currentNote": ""
+}

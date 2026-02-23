@@ -1,8 +1,7 @@
-import Button from "../components/button/ButtonPush";
 import Card from "../components/card/Card";
-import Input from "../components/input/Input";
-import ModalCard from "../components/UI/Modal";
 import { useState } from "react";
+import ModalForm from "../components/UI/ModalForm";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,57 +9,47 @@ export default function Dashboard() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const [textInput, setTextInput] = useState("");
-  const [result, setResult] = useState("");
-  const [cards, setCards] = useState({
-    users: [
-      { id: 1, name: "Alice Martin", email: "alice@example.com" },
-      { id: 2, name: "Thomas Bernard", email: "thomas@example.com" },
-    ],
-    currentName: "", // On stocke le nom ici plutôt que de casser la structure
-  });
+  // src/components/MonComposant.jsx
+  const [cards, setCards] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Gestion du changement dans l'input
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setTextInput(value);
-    setCards((prev) => ({
-      ...prev,
-      currentName: value,
-    }));
-  };
-
-  const handleClick = () => {
-    setResult(textInput);
-    setTextInput("");
-    // handlechange() a été supprimé d'ici car il n'y a pas d'événement 'e'
-    console.log("Nom validé :", textInput);
-  };
+  useEffect(() => {
+    fetch("/src/data/initial-users.json") // fichier doit être dans public/data/
+      .then((res) => {
+        if (!res.ok) throw new Error("Erreur chargement");
+        return res.json();
+      })
+      .then((data) => {
+        setCards(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
-    <>
-      <div className="dashboard">
-
+   <div>
+    <div className="dashboard">
         <div>
           {/* Le bouton qui déclenche l'ouverture */}
           <button onClick={openModal}>Afficher les détails d'Alice</button>
 
           {/* On appelle le composant en lui passant l'état et la fonction de fermeture */}
-          <ModalCard show={isModalOpen} onHide={closeModal} />
-        </div>
-
-        <div>
-          <Input value={textInput} label="Andrana" onChange={handleInputChange} />
-          <Button onClick={handleClick} type="submit" label="Description" />
-          <p>Résultat : {result}</p>
+          <ModalForm show={isModalOpen} onHide={closeModal} />
         </div>
       </div>
 
-      <div className="card-container">
-        {cards.users.map((user) => (
-          <Card key={user.id} data={user} />
-        ))}
-      </div>
-    </>
+      {loading ? (
+        <p>Chargement...</p>
+      ) : (
+        <div className="card-container">
+          {cards?.poules?.map((poule) => (
+            <Card key={poule.id} data={poule} />
+          ))}
+        </div>
+      )}
+   </div>
   );
 }

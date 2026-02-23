@@ -18,15 +18,16 @@
 
 .cards_photos {
   box-sizing: border-box; /* Crucial : le padding ne fait plus grandir le parent */
-  width: 100%; 
+  width: 100%;
   padding: 5px;
   height: 250px;
   border: 2px solid red;
   overflow: hidden; /* Sécurité : coupe tout ce qui pourrait dépasser */
 }
 
-
-
-
-
-
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  margin-top: auto; /* pousse les boutons vers le bas */
+}
