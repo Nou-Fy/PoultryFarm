@@ -12,6 +12,7 @@ export default function Dashboard() {
     isModalOpen,
     fetchCards,
     closeModal,
+    selectPoule,
   } = useStore();
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function Dashboard() {
       ) : (
         <div className="card-container">
           {cards?.poules?.map((poule) => (
-            <Card key={poule.id} data={poule} />
+            <Card key={poule.id} data={poule} onClick={() => selectPoule(poule)} />
           ))}
         </div>
       )}

@@ -11,7 +11,7 @@ export const useStore = create((set) => ({
     set({ loading: true, error: null });
 
     try {
-      const res = await fetch("/src/data/initial-users.json"); 
+      const res = await fetch("/src/data/initial-users.json");
 
       if (!res.ok) {
         throw new Error("Erreur de chargement");
@@ -21,6 +21,7 @@ export const useStore = create((set) => ({
 
       set({
         cards: data,
+        selectedPoule: null,
         loading: false,
       });
     } catch (err) {
@@ -31,6 +32,32 @@ export const useStore = create((set) => ({
       });
     }
   },
+
+  selectPoule: (poule) =>
+    set({
+      selectedPoule: poule,
+    }),
+
+  clearSelection: () =>
+    set({
+      selectedPoule: null,
+    }),
+
+  addPoule: (poule) =>
+    set((state) => ({
+      cards: {
+        ...state.cards,
+        poules: [...state.cards.poules, poule],
+      },
+    })),
+
+  removePoule: (id) =>
+    set((state) => ({
+      cards: {
+        ...state.cards,
+        poules: state.cards.poules.filter((p) => p.id !== id),
+      },
+    })),
 
   openModal: () => set({ isModalOpen: true }),
 

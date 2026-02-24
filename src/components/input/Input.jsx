@@ -14,7 +14,7 @@ export default function Input({ label, type, placeholder, value, onChange }) {
         type={type}
         placeholder={placeholder} 
         value={value} 
-        onChange={onChange} // C'est cette ligne qui manquait !
+        onChange={onChange} 
       />
     </div>
   )
