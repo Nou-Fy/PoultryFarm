@@ -1,48 +1,38 @@
+// pages/Dashboard.jsx
 import Card from "../components/card/Card";
-import { useState } from "react";
 import ModalForm from "../components/UI/ModalForm";
+import { useStore } from "../store";
 import { useEffect } from "react";
 
 export default function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  // src/components/MonComposant.jsx
-  const [cards, setCards] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const {
+    cards,
+    loading,
+    error,
+    isModalOpen,
+    fetchCards,
+    closeModal,
+  } = useStore();
 
   useEffect(() => {
-    fetch("/src/data/initial-users.json") // fichier doit être dans public/data/
-      .then((res) => {
-        if (!res.ok) throw new Error("Erreur chargement");
-        return res.json();
-      })
-      .then((data) => {
-        setCards(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
+    if (!cards) {
+      fetchCards(); // Fetch seulement si pas déjà chargé
+    }
+  }, [fetchCards, cards]);
 
   return (
-   <div>
-    <div className="dashboard">
+    <div>
+      <div className="dashboard">
         <div>
-          {/* Le bouton qui déclenche l'ouverture */}
-          <button onClick={openModal}>Afficher les détails d'Alice</button>
-
-          {/* On appelle le composant en lui passant l'état et la fonction de fermeture */}
+          {/* Modal contrôlé par le store */}
           <ModalForm show={isModalOpen} onHide={closeModal} />
         </div>
       </div>
 
       {loading ? (
         <p>Chargement...</p>
+      ) : error ? (
+        <p>Erreur : {error}</p>
       ) : (
         <div className="card-container">
           {cards?.poules?.map((poule) => (
@@ -50,6 +40,6 @@ export default function Dashboard() {
           ))}
         </div>
       )}
-   </div>
+    </div>
   );
 }

@@ -1,17 +1,9 @@
-/**
- *
- * @param {string} label
- * @param {string} clickedLabel
- * @param {string} type
- * @param {(e: React.MouseEvent<HTMLButtonElement>) => void} onClick
- * @returns
- */
-
-import React from "react";
 import "./Card.css";
 import ButtonPush from "../button/ButtonPush";
+import { useStore } from "../../store";
 
 export default function Card({ data }) {
+  const { openModal } = useStore();
   return (
     <div className="card">
       <img src={data.avatar} alt={data.nom} className="cards_photos" />
@@ -28,6 +20,7 @@ export default function Card({ data }) {
           type="button"
           label="Modifier"
           clickedLabel="Modifier !"
+          onClick={openModal}
         />
 
         <ButtonPush
