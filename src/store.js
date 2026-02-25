@@ -59,6 +59,13 @@ export const useStore = create((set) => ({
       },
     })),
 
+  persistCards: () =>
+    set((state) => {
+      if (state.cards?.poules) {
+        localStorage.setItem("poules", JSON.stringify(state.cards.poules));
+      }
+    }),
+
   openModal: () => set({ isModalOpen: true }),
 
   closeModal: () => set({ isModalOpen: false }),

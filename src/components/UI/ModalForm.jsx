@@ -5,7 +5,7 @@ import { Form } from "react-bootstrap";
 import Input from "../input/Input";
 
 export function ModalForm({ show, onHide }) {
-  const { closeModal, selectedPoule } = useStore();
+  const { closeModal, selectPoule, selectedPoule, clearSelection } = useStore();
 
   const rowStyle = {
     display: "flex",
@@ -19,17 +19,24 @@ export function ModalForm({ show, onHide }) {
     textAlign: "left",
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // On vérifie que 'name' existe pour éviter d'écraser l'état par erreur
+    if (name) {
+      selectPoule({
+        ...selectedPoule,
+        [name]: value,
+      });
+    }
+  };
+
   return (
-    <Modal
-      style={{
-        height: "300px",
-      }}
-      show={show}
-      onHide={onHide}>
+    <Modal show={show} onHide={onHide}>
       <div>
         <div
           style={{
-            padding: "5px",
+            padding: "15px",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
@@ -44,7 +51,10 @@ export function ModalForm({ show, onHide }) {
             }}
             label="Fermer"
             clickedLabel="Fermé"
-            onClick={onHide || selectedPoule}
+            onClick={() => {
+              clearSelection();
+              onHide();
+            }}
           />
           <label
             onClick={closeModal}
@@ -67,73 +77,101 @@ export function ModalForm({ show, onHide }) {
           </label>
         </div>
 
-        <Form style={{ padding: "10px" }}>
+        <Form style={{ padding: "15px" }}>
           <h4>Formulaire de modification</h4>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Nom :</p>
             <Input
+              name="nom"
               type="text"
               placeholder="Nom de la poule"
               value={selectedPoule?.nom || ""}
-              
+              onChange={handleChange}
             />
           </div>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Race :</p>
             <Input
+              name="race"
               type="text"
               placeholder="Race de la poule"
               value={selectedPoule?.race || ""}
+              onChange={handleChange}
             />
           </div>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Âge :</p>
             <Input
+              name="ageMois"
               type="number"
               placeholder="Âge de la poule"
-              value={selectedPoule?.age || ""}
+              value={selectedPoule?.ageMois || ""}
+              onChange={handleChange}
             />
           </div>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Ponte / semaine :</p>
             <Input
+              name="ponteParSemaine"
               type="number"
               placeholder="Ponte par semaine"
               value={selectedPoule?.ponteParSemaine || ""}
+              onChange={handleChange}
             />
           </div>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Couleur œuf :</p>
             <Input
+              name="couleurOeuf"
               type="text"
               placeholder="Couleur de l'œuf"
               value={selectedPoule?.couleurOeuf || ""}
+              onChange={handleChange}
             />
           </div>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Date entrée :</p>
-            <Input type="date" value={selectedPoule?.dateArrivee || ""} />
+            <Input
+              name="dateArrivee"
+              type="date"
+              value={selectedPoule?.dateArrivee || ""}
+              onChange={handleChange}
+            />
           </div>
 
           <div style={rowStyle}>
             <p style={labelStyle}>Notes :</p>
             <Input
+              name="notes"
               type="text"
               placeholder="Notes"
-              value={selectedPoule?.notes || ""}
+              value={selectedPoule?.notes}
+              onChange={handleChange}
             />
           </div>
 
           <ButtonPush
             label="Soumettre"
             clickedLabel="Soumis"
-            onClick={() => alert("Formulaire soumis")}
+            onClick={() => {
+              console.log("Poule modifiée :", selectedPoule);
+              useStore.getState().addPoule(selectedPoule);
+              clearSelection();
+              closeModal();
+              alert(
+                "Vérification des données :\n" +
+                  "------------------------\n" +
+                  `Nom: ${selectedPoule.nom}\n` +
+                  `Race: ${selectedPoule.race}\n` +
+                  `Âge: ${selectedPoule.ageMois}`,
+              );
+            }}
           />
         </Form>
       </div>

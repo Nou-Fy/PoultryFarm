@@ -1,4 +1,3 @@
-// pages/Dashboard.jsx
 import Card from "../components/card/Card";
 import ModalForm from "../components/UI/ModalForm";
 import { useStore } from "../store";
@@ -17,7 +16,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!cards) {
-      fetchCards(); // Fetch seulement si pas déjà chargé
+      fetchCards(); 
     }
   }, [fetchCards, cards]);
 
@@ -25,7 +24,6 @@ export default function Dashboard() {
     <div>
       <div className="dashboard">
         <div>
-          {/* Modal contrôlé par le store */}
           <ModalForm show={isModalOpen} onHide={closeModal} />
         </div>
       </div>

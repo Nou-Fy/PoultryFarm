@@ -1,21 +1,29 @@
 /**
- * @param {string} label 
- * @param {string} type 
- * @param {string} placeholder 
- * @param {string} value 
- * @param {function} onChange 
+ * @param {string} label
+ * @param {string} type
+ * @param {string} placeholder
+ * @param {string} value
+ * @param {function} onChange
  */
 
-export default function Input({ label, type, placeholder, value, onChange }) { 
+export default function Input({
+  name,
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+}) {
   return (
     <div className="input-group">
       <label>{label}</label>
-      <input 
+      <input
+        name={name}
         type={type}
-        placeholder={placeholder} 
-        value={value} 
-        onChange={onChange} 
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </div>
-  )
+  );
 }
