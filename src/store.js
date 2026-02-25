@@ -77,4 +77,10 @@ export const useStore = create((set) => ({
       error: null,
       isModalOpen: false,
     }),
+
+  valeuInput: (name, value) => {
+    set((state) => ({
+      selectedPoule: { ...state.selectedPoule, [name]: value },
+    }));
+  },
 }));
