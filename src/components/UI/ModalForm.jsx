@@ -4,7 +4,6 @@ import ButtonPush from "../button/ButtonPush";
 import { Form } from "react-bootstrap";
 import Input from "../input/Input";
 
-// On récupère show et onHide via la déstructuration des props
 export function ModalForm({ show, onHide }) {
   const { closeModal, selectedPoule } = useStore();
 
