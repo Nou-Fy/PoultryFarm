@@ -1,9 +1,22 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Dashboard from './pages/Dashbord';
+import { Routes, Route } from "react-router-dom";
 
-export default function App() {
+import NavBar from "./components/navBar/navBar";
+import Dashboard from "./pages/Dashbord";
+import AjoutChicken from "./pages/AjoutChicken"
+
+function App() {
   return (
-    <Dashboard />
+    <div className="app">
+      <NavBar />
+
+      <main style={{ padding: "2rem" }}>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/insert" element={<AjoutChicken />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
+
+export default App;

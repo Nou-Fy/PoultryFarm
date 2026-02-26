@@ -1,16 +1,24 @@
 import { useStore } from "../store";
+import Input from "../components/input/Input";
+import ButtonPush from "../components/button/ButtonPush";
 
 export default function AjoutChicken() {
-  const { selectedPoule, valeuInput } = useStore();
+  const { selectedPoule, valeuInput, clearSelection, closeModal } = useStore();
+  const addPoule = useStore((state) => state.addPoule);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target.value;
     valeuInput(name, value);
   };
 
   return (
     <>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Nom :</p>
         <Input
           name="nom"
@@ -19,12 +27,17 @@ export default function AjoutChicken() {
           value={selectedPoule?.nom || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Race :</p>
         <Input
           name="race"
@@ -33,12 +46,17 @@ export default function AjoutChicken() {
           value={selectedPoule?.race || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Âge :</p>
         <Input
           name="ageMois"
@@ -47,12 +65,17 @@ export default function AjoutChicken() {
           value={selectedPoule?.ageMois || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Ponte / semaine :</p>
         <Input
           name="ponteParSemaine"
@@ -61,12 +84,17 @@ export default function AjoutChicken() {
           value={selectedPoule?.ponteParSemaine || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Couleur œuf :</p>
         <Input
           name="couleurOeuf"
@@ -75,12 +103,17 @@ export default function AjoutChicken() {
           value={selectedPoule?.couleurOeuf || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Date entrée :</p>
         <Input
           name="dateArrivee"
@@ -88,24 +121,48 @@ export default function AjoutChicken() {
           value={selectedPoule?.dateArrivee || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <p>Notes :</p>
         <Input
           name="notes"
           type="text"
           placeholder="Notes"
-          value={selectedPoule?.notes}
+          value={selectedPoule?.notes || ""}
           onChange={(e) => {
             valeuInput(e.target.name, e.target.value);
-            handleChange(); // Assure-toi que cette fonction est bien définie
+            handleChange;
           }}
         />
       </div>
+
+      <ButtonPush
+        label="Soumettre"
+        clickedLabel="Soumis"
+        onClick={() => {
+          console.log("Poule modifiée :", selectedPoule);
+          addPoule(selectedPoule);
+          console.log(selectedPoule);
+          clearSelection();
+          closeModal();
+          alert(
+            "Vérification des données :\n" +
+              "------------------------\n" +
+              `Nom: ${selectedPoule.nom}\n` +
+              `Race: ${selectedPoule.race}\n` +
+              `Âge: ${selectedPoule.ageMois}`,
+          );
+        }}
+      />
     </>
   );
 }

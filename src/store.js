@@ -2,7 +2,7 @@
 import { create } from "zustand";
 
 export const useStore = create((set) => ({
-  cards: null,
+  cards: [],
   loading: false,
   error: null,
   isModalOpen: false,
@@ -21,7 +21,7 @@ export const useStore = create((set) => ({
 
       set({
         cards: data,
-        selectedPoule: null,
+        selectedPoule: [],
         loading: false,
       });
     } catch (err) {
@@ -43,12 +43,17 @@ export const useStore = create((set) => ({
       selectedPoule: null,
     }),
 
-  addPoule: (poule) =>
+  // addPoule: (poule) =>
+  //   set((state) => ({
+  //     cards: {
+  //       ...state.cards,
+  //       poules: [...state.cards, poule],
+  //     },
+  //   })),
+
+    addPoule: (poule) =>
     set((state) => ({
-      cards: {
-        ...state.cards,
-        poules: [...state.cards.poules, poule],
-      },
+      cards: [...state.cards, poule],
     })),
 
   removePoule: (id) =>
