@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/navBar/navBar";
-import Dashboard from "./pages/Dashbord";
 import AjoutChicken from "./pages/AjoutChicken"
+import Dashboard from "./pages/Dashbord";
 
 function App() {
   return (

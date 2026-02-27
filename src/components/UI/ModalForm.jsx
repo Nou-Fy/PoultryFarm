@@ -161,7 +161,7 @@ export function ModalForm({ show, onHide }) {
             clickedLabel="Soumis"
             onClick={() => {
               console.log("Poule modifiée :", selectedPoule);
-              useStore.getState().addPoule(selectedPoule);
+              useStore.getState().updatePoule(selectedPoule);
               clearSelection();
               closeModal();
               alert(

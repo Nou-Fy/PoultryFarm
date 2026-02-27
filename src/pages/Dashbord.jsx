@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!cards) {
-      fetchCards(); 
+      fetchCards();
     }
   }, [fetchCards, cards]);
 
@@ -35,7 +35,11 @@ export default function Dashboard() {
       ) : (
         <div className="card-container">
           {cards?.poules?.map((poule) => (
-            <Card key={poule.id} data={poule} onClick={() => selectPoule(poule)} />
+            <Card
+              key={poule.id}
+              data={poule}
+              onClick={() => selectPoule(poule)}
+            />
           ))}
         </div>
       )}

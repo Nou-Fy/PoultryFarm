@@ -3,11 +3,11 @@ import Input from "../components/input/Input";
 import ButtonPush from "../components/button/ButtonPush";
 
 export default function AjoutChicken() {
-  const { selectedPoule, valeuInput, clearSelection, closeModal } = useStore();
-  const addPoule = useStore((state) => state.addPoule);
+  const { selectedPoule, valeuInput, clearSelection, addPoule, closeModal } = useStore();
 
   const handleChange = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
+    console.log(name,value)
     valeuInput(name, value);
   };
 
@@ -25,10 +25,7 @@ export default function AjoutChicken() {
           type="text"
           placeholder="Nom de la poule"
           value={selectedPoule?.nom || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -44,10 +41,7 @@ export default function AjoutChicken() {
           type="text"
           placeholder="Race de la poule"
           value={selectedPoule?.race || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -63,10 +57,7 @@ export default function AjoutChicken() {
           type="number"
           placeholder="Âge de la poule"
           value={selectedPoule?.ageMois || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -82,10 +73,7 @@ export default function AjoutChicken() {
           type="number"
           placeholder="Ponte par semaine"
           value={selectedPoule?.ponteParSemaine || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -101,10 +89,7 @@ export default function AjoutChicken() {
           type="text"
           placeholder="Couleur de l'œuf"
           value={selectedPoule?.couleurOeuf || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -119,10 +104,7 @@ export default function AjoutChicken() {
           name="dateArrivee"
           type="date"
           value={selectedPoule?.dateArrivee || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -138,10 +120,7 @@ export default function AjoutChicken() {
           type="text"
           placeholder="Notes"
           value={selectedPoule?.notes || ""}
-          onChange={(e) => {
-            valeuInput(e.target.name, e.target.value);
-            handleChange;
-          }}
+          onChange={handleChange}
         />
       </div>
 
@@ -149,11 +128,8 @@ export default function AjoutChicken() {
         label="Soumettre"
         clickedLabel="Soumis"
         onClick={() => {
-          console.log("Poule modifiée :", selectedPoule);
           addPoule(selectedPoule);
-          console.log(selectedPoule);
-          clearSelection();
-          closeModal();
+
           alert(
             "Vérification des données :\n" +
               "------------------------\n" +
@@ -161,6 +137,9 @@ export default function AjoutChicken() {
               `Race: ${selectedPoule.race}\n` +
               `Âge: ${selectedPoule.ageMois}`,
           );
+
+          clearSelection();
+          closeModal();
         }}
       />
     </>

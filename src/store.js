@@ -2,10 +2,11 @@
 import { create } from "zustand";
 
 export const useStore = create((set) => ({
-  cards: [],
+  cards: null,
   loading: false,
   error: null,
   isModalOpen: false,
+  selectedPoule: null,
 
   fetchCards: async () => {
     set({ loading: true, error: null });
@@ -21,7 +22,6 @@ export const useStore = create((set) => ({
 
       set({
         cards: data,
-        selectedPoule: [],
         loading: false,
       });
     } catch (err) {
@@ -33,28 +33,64 @@ export const useStore = create((set) => ({
     }
   },
 
-  selectPoule: (poule) =>
+  selectPoule: (poule) => {
+    console.log("Type de la poule :", poule?.type);
+    console.log("Poule cliquée :", poule);
+    console.log("Clés disponibles :", Object.keys(poule || {}));
+    console.log("Valeur de .type :", poule?.type);
     set({
       selectedPoule: poule,
-    }),
+    });
+  },
 
   clearSelection: () =>
     set({
       selectedPoule: null,
     }),
 
-  // addPoule: (poule) =>
-  //   set((state) => ({
-  //     cards: {
-  //       ...state.cards,
-  //       poules: [...state.cards, poule],
-  //     },
-  //   })),
-
-    addPoule: (poule) =>
+  valeuInput: (name, value) =>
     set((state) => ({
-      cards: [...state.cards, poule],
+      selectedPoule: {
+        ...state.selectedPoule,
+        [name]: value,
+      },
     })),
+
+  addPoule: (poule) =>
+    set((state) => ({
+      cards: {
+        ...state.cards,
+        poules: [...state.cards.poules, { ...poule, id: Date.now() }],
+      },
+    })),
+
+  updatePoule: (poule) =>
+    set((state) => {
+      if (!state.cards?.poules && !Array.isArray(state.cards)) return state;
+
+      const poulesActuelles = state.cards.poules || state.cards;
+
+      return {
+        cards: {
+          ...state.cards,
+          poules: poulesActuelles.map((p) => (p.id === poule.id ? poule : p)),
+        },
+      };
+    }),
+
+  // updatePoule: (poule) =>
+  //   set((state) => {
+  //     if (!state.cards) return state;
+
+  //     return {
+  //       cards: {
+  //         ...state.cards,
+  //         poules: state.cards.poules.map((p) =>
+  //           p.id === poule.id ? poule : p,
+  //         ),
+  //       },
+  //     };
+  //   }),
 
   removePoule: (id) =>
     set((state) => ({
@@ -63,13 +99,6 @@ export const useStore = create((set) => ({
         poules: state.cards.poules.filter((p) => p.id !== id),
       },
     })),
-
-  persistCards: () =>
-    set((state) => {
-      if (state.cards?.poules) {
-        localStorage.setItem("poules", JSON.stringify(state.cards.poules));
-      }
-    }),
 
   openModal: () => set({ isModalOpen: true }),
 
@@ -82,10 +111,4 @@ export const useStore = create((set) => ({
       error: null,
       isModalOpen: false,
     }),
-
-  valeuInput: (name, value) => {
-    set((state) => ({
-      selectedPoule: { ...state.selectedPoule, [name]: value },
-    }));
-  },
 }));
