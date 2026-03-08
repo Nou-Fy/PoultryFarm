@@ -1,11 +1,15 @@
 import Modal from "react-bootstrap/Modal";
-import { useStore } from "../../store";
 import ButtonPush from "../button/ButtonPush";
 import { Form } from "react-bootstrap";
 import Input from "../input/Input";
+import { useUIStore } from "../../store/useUIStore";
+import { useSelectionStore } from "../../store/useSelectionStore";
+import { useCardStore } from "../../store/useCardStore";
 
 export function ModalForm({ show, onHide }) {
-  const { closeModal, selectPoule, selectedPoule, clearSelection } = useStore();
+  const {closeModal} = useUIStore();
+  const {selectPoule, selectedPoule, clearSelection} = useSelectionStore();
+  const {updatePoule} = useCardStore();
 
   const rowStyle = {
     display: "flex",
@@ -161,16 +165,16 @@ export function ModalForm({ show, onHide }) {
             clickedLabel="Soumis"
             onClick={() => {
               console.log("Poule modifiée :", selectedPoule);
-              useStore.getState().updatePoule(selectedPoule);
+              updatePoule(selectedPoule);
               clearSelection();
               closeModal();
-              alert(
-                "Vérification des données :\n" +
-                  "------------------------\n" +
-                  `Nom: ${selectedPoule.nom}\n` +
-                  `Race: ${selectedPoule.race}\n` +
-                  `Âge: ${selectedPoule.ageMois}`,
-              );
+              // alert(
+              //   "Vérification des données :\n" +
+              //     "------------------------\n" +
+              //     `Nom: ${selectedPoule.nom}\n` +
+              //     `Race: ${selectedPoule.race}\n` +
+              //     `Âge: ${selectedPoule.ageMois}`,
+              // );
             }}
           />
         </Form>

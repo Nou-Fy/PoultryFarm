@@ -1,9 +1,12 @@
 import "./Card.css";
 import ButtonPush from "../button/ButtonPush";
-import { useStore } from "../../store";
+import { useUIStore } from "../../store/useUIStore";
+import { useSelectionStore } from "../../store/useSelectionStore";
 
 export default function Card({ data }) {
-  const { openModal,selectPoule, clearSelection } = useStore();
+  const { openModal } = useUIStore();
+  const { selectPoule, clearSelection } = useSelectionStore();
+
   return (
     <div className="card">
       <img src={data.avatar} alt={data.nom} className="cards_photos" />
@@ -16,7 +19,6 @@ export default function Card({ data }) {
         <p>Santé : {data.sante}</p>
         <p>Date d'arrivée : {data.dateArrivee}</p>
         <p>Notes : {data.notes}</p>
-        
       </div>
       <div className="card-buttons">
         <ButtonPush

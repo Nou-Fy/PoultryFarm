@@ -1,14 +1,19 @@
-import { useStore } from "../store";
 import Input from "../components/input/Input";
 import ButtonPush from "../components/button/ButtonPush";
+import { useSelectionStore } from "../store/useSelectionStore";
+import { useCardStore } from "../store/useCardStore";
+import { useUIStore } from "../store/useUIStore";
 
 export default function AjoutChicken() {
-  const { selectedPoule, valeuInput, clearSelection, addPoule, closeModal } = useStore();
+
+  const {selectedPoule, clearSelection, updateDraftField} = useSelectionStore();
+  const {addPoule} = useCardStore();
+  const { closeModal } = useUIStore();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name,value)
-    valeuInput(name, value);
+    updateDraftField(name, value);
   };
 
   return (

@@ -1,24 +1,24 @@
 import Card from "../components/card/Card";
 import ModalForm from "../components/UI/ModalForm";
-import { useStore } from "../store";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useCardStore } from "../store/useCardStore"
+import { useUIStore } from "../store/useUIStore";
+import { useSelectionStore } from "../store/useSelectionStore";
 
 export default function Dashboard() {
-  const {
-    cards,
-    loading,
-    error,
-    isModalOpen,
-    fetchCards,
-    closeModal,
-    selectPoule,
-  } = useStore();
+  const { cards, loading, fetchCards, error } = useCardStore();
+  const { isModalOpen, closeModal } = useUIStore();
+  const { selectPoule } = useSelectionStore();
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
     if (!cards) {
       fetchCards();
     }
-  }, [fetchCards, cards]);
+  }, [cards, fetchCards]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   return (
     <div>
