@@ -6,7 +6,7 @@ import { useCardStore } from "../../store/useCardStore";
 import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Card({ data }) {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { openModal } = useUIStore();
   const { selectPoule } = useSelectionStore();
@@ -34,6 +34,7 @@ const navigate = useNavigate();
           onClick={() => {
             selectPoule(data);
             openModal();
+            navigate("/");
           }}
         />
 
@@ -45,7 +46,7 @@ const navigate = useNavigate();
             onClick={() => {
               removePoule(data.id);
               console.log("suppr");
-              navigate("/")
+              navigate("/");
             }}
           />
         </div>

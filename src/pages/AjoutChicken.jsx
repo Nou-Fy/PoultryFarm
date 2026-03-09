@@ -3,11 +3,14 @@ import ButtonPush from "../components/button/ButtonPush";
 import { useSelectionStore } from "../store/useSelectionStore";
 import { useCardStore } from "../store/useCardStore";
 import { useUIStore } from "../store/useUIStore";
+import { useNavigate } from "react-router-dom";
 
 export default function AjoutChicken() {
+  const navigate = useNavigate();
 
-  const {selectedPoule, clearSelection, updateDraftField} = useSelectionStore();
-  const {addPoule} = useCardStore();
+  const { selectedPoule, clearSelection, updateDraftField } =
+    useSelectionStore();
+  const { addPoule } = useCardStore();
   const { closeModal } = useUIStore();
 
   const handleChange = (e) => {
@@ -145,6 +148,7 @@ export default function AjoutChicken() {
 
           clearSelection();
           closeModal();
+          navigate("/");
         }}
       />
     </>
