@@ -2,10 +2,12 @@ import "./Card.css";
 import ButtonPush from "../button/ButtonPush";
 import { useUIStore } from "../../store/useUIStore";
 import { useSelectionStore } from "../../store/useSelectionStore";
+import { useCardStore } from "../../store/useCardStore";
 
 export default function Card({ data }) {
   const { openModal } = useUIStore();
   const { selectPoule, clearSelection } = useSelectionStore();
+  const {removePoule} = useCardStore();
 
   return (
     <div className="card">
@@ -30,6 +32,14 @@ export default function Card({ data }) {
             selectPoule(data);
             openModal();
           }}
+        />
+
+        <ButtonPush className="card-buttons"
+        type="button"
+        label= "Delete"
+        onClick= {() => {
+          removePoule(selectPoule)
+        }}
         />
 
         <ButtonPush

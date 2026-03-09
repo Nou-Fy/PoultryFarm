@@ -18,28 +18,42 @@ export const useCardStore = create((set) => ({
   },
 
   addPoule: (poule) =>
-    set((state) => ({
-      cards: {
-        ...state.cards,
-        poules: [...(state.cards?.poules || []), { ...poule, id: Date.now() }],
-      },
-    })),
+    set((state) => {
+      if (!state.cards) return state;
 
-  updatePoule: (poule) =>
-    set((state) => ({
-      cards: {
-        ...state.cards,
-        poules: state.cards?.poules.map((p) => (p.id === poule.id ? poule : p)),
-      },
-    })),
+      return {
+        cards: {
+          ...state.cards,
+          poules: [...state.cards.poules, { ...poule, id: Date.now() }],
+        },
+      };
+    }),
+
+  updatePoule: (pouleUpdated) =>
+    set((state) => {
+      if (!state.cards?.poules) return state;
+
+      return {
+        cards: {
+          ...state.cards,
+          poules: state.cards.poules.map((p) =>
+            p.id === pouleUpdated.id ? pouleUpdated : p,
+          ),
+        },
+      };
+    }),
 
   removePoule: (id) =>
-    set((state) => ({
-      cards: {
-        ...state.cards,
-        poules: state.cards?.poules.filter((p) => p.id !== id),
-      },
-    })),
-    
+    set((state) => {
+      if (!state.cards?.poules) return state;
+
+      return {
+        cards: {
+          ...state.cards,
+          poules: state.cards.poules.filter((p) => p.id !== id),
+        },
+      };
+    }),
+
   resetCards: () => set({ cards: null, loading: false, error: null }),
 }));

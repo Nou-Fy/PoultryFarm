@@ -7,10 +7,18 @@ export const useSelectionStore = create((set) => ({
 
   clearSelection: () => set({ selectedPoule: null }),
 
+  // updateDraftField: (name, value) =>
+  //   set((state) => ({
+  //     selectedPoule: state.selectedPoule
+  //       ? { ...state.selectedPoule, [name]: value }
+  //       : null,
+  //   })),
+
   updateDraftField: (name, value) =>
     set((state) => ({
-      selectedPoule: state.selectedPoule 
-        ? { ...state.selectedPoule, [name]: value } 
-        : null,
+      selectedPoule: {
+        ...state.selectedPoule,
+        [name]: value,
+      },
     })),
 }));

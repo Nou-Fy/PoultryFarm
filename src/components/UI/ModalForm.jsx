@@ -162,19 +162,20 @@ export function ModalForm({ show, onHide }) {
 
           <ButtonPush
             label="Soumettre"
+            type="button"
             clickedLabel="Soumis"
             onClick={() => {
               console.log("Poule modifiée :", selectedPoule);
               updatePoule(selectedPoule);
               clearSelection();
               closeModal();
-              // alert(
-              //   "Vérification des données :\n" +
-              //     "------------------------\n" +
-              //     `Nom: ${selectedPoule.nom}\n` +
-              //     `Race: ${selectedPoule.race}\n` +
-              //     `Âge: ${selectedPoule.ageMois}`,
-              // );
+              alert(
+                "Vérification des données :\n" +
+                  "------------------------\n" +
+                  `Nom: ${selectedPoule.nom}\n` +
+                  `Race: ${selectedPoule.race}\n` +
+                  `Âge: ${selectedPoule.ageMois}`,
+              );
             }}
           />
         </Form>

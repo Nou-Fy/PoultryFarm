@@ -12,7 +12,7 @@ export default function AjoutChicken() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name,value)
+    console.log(name, value);
     updateDraftField(name, value);
   };
 
