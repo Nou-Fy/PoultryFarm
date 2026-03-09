@@ -3,8 +3,11 @@ import ButtonPush from "../button/ButtonPush";
 import { useUIStore } from "../../store/useUIStore";
 import { useSelectionStore } from "../../store/useSelectionStore";
 import { useCardStore } from "../../store/useCardStore";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Card({ data }) {
+const navigate = useNavigate();
+
   const { openModal } = useUIStore();
   const { selectPoule } = useSelectionStore();
   const { removePoule } = useCardStore();
@@ -34,15 +37,6 @@ export default function Card({ data }) {
           }}
         />
 
-        {/* <ButtonPush className="card-buttons"
-        type="button"
-        label= "Delete"
-        onClick= {() => {
-          removePoule(data.id);
-          console.log("voafafa")
-        }}
-        /> */}
-
         <div className="card-buttons">
           <ButtonPush
             className="card-button"
@@ -51,6 +45,7 @@ export default function Card({ data }) {
             onClick={() => {
               removePoule(data.id);
               console.log("suppr");
+              navigate("/")
             }}
           />
         </div>
