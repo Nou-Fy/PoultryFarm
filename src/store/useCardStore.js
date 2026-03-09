@@ -44,16 +44,24 @@ export const useCardStore = create((set) => ({
     }),
 
   removePoule: (id) =>
-    set((state) => {
-      if (!state.cards?.poules) return state;
+    set((state) => ({
+      cards: {
+        ...state.cards,
+        poules: state.cards.poules.filter((p) => p.id !== id),
+      },
+    })),
 
-      return {
-        cards: {
-          ...state.cards,
-          poules: state.cards.poules.filter((p) => p.id !== id),
-        },
-      };
-    }),
+  // removePoule: (id) =>
+  //   set((state) => {
+  //     if (!state.cards?.poules) return state;
+
+  //     return {
+  //       cards: {
+  //         ...state.cards,
+  //         poules: state.cards.poules.filter((p) => p.id !== id),
+  //       },
+  //     };
+  //   }),
 
   resetCards: () => set({ cards: null, loading: false, error: null }),
 }));

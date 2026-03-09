@@ -6,8 +6,8 @@ import { useCardStore } from "../../store/useCardStore";
 
 export default function Card({ data }) {
   const { openModal } = useUIStore();
-  const { selectPoule, clearSelection } = useSelectionStore();
-  const {removePoule} = useCardStore();
+  const { selectPoule } = useSelectionStore();
+  const { removePoule } = useCardStore();
 
   return (
     <div className="card">
@@ -34,23 +34,26 @@ export default function Card({ data }) {
           }}
         />
 
-        <ButtonPush className="card-buttons"
+        {/* <ButtonPush className="card-buttons"
         type="button"
         label= "Delete"
         onClick= {() => {
-          removePoule(selectPoule)
+          removePoule(data.id);
+          console.log("voafafa")
         }}
-        />
+        /> */}
 
-        <ButtonPush
-          className="card-button"
-          type="reset"
-          label="Annuler"
-          clickedLabel="Reset !"
-          onClick={() => {
-            clearSelection();
-          }}
-        />
+        <div className="card-buttons">
+          <ButtonPush
+            className="card-button"
+            type="button"
+            label="Delete"
+            onClick={() => {
+              removePoule(data.id);
+              console.log("suppr");
+            }}
+          />
+        </div>
       </div>
     </div>
   );
